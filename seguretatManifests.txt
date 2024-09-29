@@ -1,0 +1,36 @@
+Mesures de seguretat implementades i explicaió dels arxius manifests:
+
+Main.tf:
+
+-Service account per terraform
+
+
+
+
+CI-CD.yaml:
+
+-Tests després de construir la imatge i després del push: CHECKUT@v2
+-Service account pel deploy.
+
+
+
+
+Deployment.yaml:
+
+-3 Rèpliques que poden escalar a 9
+-Liveness prove i rediness prove per veure que la màquina està a punt i viva cada 10 i 5 segons. El primer 30 i 15 per donar temps al deploy.
+
+
+
+
+Ingress.yaml:
+
+-Ingress com a load balancer.
+-I redirigeix el tràfic al 443 (ssl-redirect)
+
+
+
+
+Service.yaml:
+
+-Amb ports 80 i 443 configurats.

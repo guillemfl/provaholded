@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: golang-server
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: golang-server
@@ -29,3 +29,16 @@ spec:
             port: 8080
           initialDelaySeconds: 15
           periodSeconds: 5
+
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: golang-server-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: golang-server
+  minReplicas: 3
+  maxReplicas: 9
+  targetCPUUtilizationPercentage: 80
